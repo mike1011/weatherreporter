@@ -1,5 +1,5 @@
 {
-  "name": "webhook-echo-sample",
+  "name": "chatbot-mike1011.c9users.io",
   "version": "1.0.0",
   "description": "Webhook echo sample",
   "main": "index.js",
@@ -8,7 +8,16 @@
   },
   "author": "Sunil Syal",
   "dependencies": {
+    "apiai": "^4.0.3",
     "body-parser": "^1.15.0",
-    "express": "^4.13.4"
+    "cheerio": "^1.0.0-rc.2",
+    "claudia-bot-builder": "^2.15.0",
+    "express": "^4.15.4",
+    "jquery": "^3.2.1",
+    "jsdom": "^11.2.0",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
+    "uuid": "^3.1.0",
+    "websocket": "^1.0.24"
   }
 }
