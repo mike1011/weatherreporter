@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Simple Chatbox</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-
-
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <script src="/js/script.js"></script>
@@ -31,53 +31,38 @@
 <div>
 <nav class="navbar navbar-inverse container-fluid" role="navigation" >
        <ul class="nav navbar-nav">
-      <li class="active"><a href="/">My Chatbot<span class="sr-only">(current)</span></a></li>
+      <li class="active"><a href="/">Sample Chatbot <small>using Nodejs, socket.io and Api.ai service</small><span class="sr-only">(current)</span></a></li>
 
     </ul>
 </nav>
 </div>
 
 <br/>
-<!--<div class="container text-center">-->
-<!--    <iframe-->
-<!--    width="350"-->
-<!--    height="430"-->
-<!--    src="https://console.api.ai/api-client/demo/embedded/9357489e-7bb7-464b-83c4-43377d2e730d">-->
-<!--</iframe>-->
-<!--</div>-->
 
-
-<!--<div class="container">-->
-<!--  <input type="text" id="pseudoInput"/>-->
-<!--  <button id="pseudoSet">Set Pseudo</button>-->
-<!--  <div id="chatEntries"></div>-->
-<!--  <div id="chatControls">-->
-<!--    <input type="text" id="messageInput"/>-->
-<!--    <button id="submit">Send</button>-->
-<!--  </div>-->
-<!--</div>-->
 
 <div class="container">
           <div class="row form-group">
               <div class="col-xs-12 col-md-offset-2 col-md-8 col-lg-8 col-lg-offset-2">
                 <div class="panel panel-primary">
                       <div class="panel-heading">
-                          <span class="fa fa-comment"></span> Chats
+                          <span class="fa fa-comment"></span> Mr Weather at your service, how can i help you?
                       </div>
                       <div class="panel-body body-panel">
                               <div id="chatEntries" class="col-xs-12"></div>
                       </div>
+                      <form id="chatForm">
                       <div class="panel-footer clearfix" id="chatControls">
                           <div class="col-md-12" >
                               <div class="input-group">
-                                <input type="text" id="messageInput" autofocus="on" class="form-control" autocomplete="off" placeholder="Type something...">
+                                <input type="text" id="messageInput" name="message" autofocus="on" class="form-control" autocomplete="off" placeholder="Type something...">
                                 <span class="input-group-btn">
-                                  <button id="submit" class="btn btn-secondary" type="submit">Go!</button>
+                                  <button class="btn btn-secondary" type="submit">Go!</button>
                                 </span>
                               </div>
                             </div>        
                           
                       </div>
+                      </form>
                   </div>
               </div>
           </div>
