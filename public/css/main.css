@@ -1,0 +1,8 @@
+.body-panel {
+  overflow-y: auto;
+  max-height: 500px;
+  min-height:250px;
+}
+.page-header{
+padding:0 27px;
+}
