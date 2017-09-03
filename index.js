@@ -132,7 +132,7 @@ app.post('/wwo', function (req, res) {
   
       var city =  req.body.message;
       var d = new Date();
-      var date = d.toLocaleDateString();
+      var date = d.toDateString();
       var requestUrl = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?format=json&num_of_days=1' +
     '&q=' + encodeURIComponent(city) + '&key='+wwoApiKey+'&date=' + date;
       var html = "";

@@ -25,7 +25,7 @@ $('.body-panel').scrollTop($('.body-panel')[0].scrollHeight - $('.body-panel')[0
 
 function addReply(msg) {
             var dt = new Date();
-            var timestamp = dt.toLocaleString() 
+            var timestamp = dt.toLocaleString();
 
             console.log("===adding message====",msg,timestamp);
             var listing = "<div class='media message'>"+
@@ -48,8 +48,6 @@ $('.body-panel').scrollTop($('.body-panel')[0].scrollHeight - $('.body-panel')[0
 function sentMessage(msg) {
     if (msg != "") 
     {
-        //$.post("/echo", { message: $("#messageInput").val() });
-        //socket.emit('message', $('#messageInput').val());
         addMessage(msg);
         $.post( "wwo",$('form').serialize(), function( data ) {
             //console.log("=======response=====",JSON.stringify(data.result.fulfillment.speech));
