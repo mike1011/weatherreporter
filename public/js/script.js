@@ -30,7 +30,7 @@ function addReply(msg) {
             console.log("===adding message====",msg,timestamp);
             var listing = "<div class='media message'>"+
                             "<div class='media-body text-right'>"+
-                              "<h4 class='media-heading'>Chatbot <small><i>"+timestamp+"</i></small></h4>"+
+                              "<h4 class='media-heading'>WeatherBot <small><i>"+timestamp+"</i></small></h4>"+
                               "<p>"+msg+"</p>"+
                             "</div>"+
                             "<div class='media-right'>"+
