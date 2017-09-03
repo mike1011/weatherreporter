@@ -15,7 +15,7 @@ function addMessage(msg) {
                             "</div>"+
                             "<div class='media-body'>"+
                               "<h4 class='media-heading'>You <small><i>"+timestamp+"</i></small></h4>"+
-                              "<p>"+msg+"</p>"+
+                              "<p class='well'>"+msg+"</p>"+
                             "</div>"+
                           "</div>";  
 //    $("#chatEntries").append('<div class="message"><p>' + pseudo + ' : ' + msg + '</p></div>');
@@ -23,15 +23,15 @@ $("#chatEntries").append(listing);
 $('.body-panel').scrollTop($('.body-panel')[0].scrollHeight - $('.body-panel')[0].clientHeight);
 }    
 
-function addReply(msg) {
+function addReply(html) {
             var dt = new Date();
             var timestamp = dt.toLocaleString();
 
-            console.log("===adding message====",msg,timestamp);
+            console.log("===adding message====",html,timestamp);
             var listing = "<div class='media message'>"+
                             "<div class='media-body text-right'>"+
                               "<h4 class='media-heading'>WeatherBot <small><i>"+timestamp+"</i></small></h4>"+
-                              "<p>"+msg+"</p>"+
+                              html+
                             "</div>"+
                             "<div class='media-right'>"+
                                   "<span class='fa-stack fa-lg'>"+
@@ -49,11 +49,11 @@ function sentMessage(msg) {
     if (msg != "") 
     {
         addMessage(msg);
-        $.post( "wwo",$('form').serialize(), function( data ) {
+        $.post( "wwo",$('form').serialize(), function( html ) {
             //console.log("=======response=====",JSON.stringify(data.result.fulfillment.speech));
-            console.log("=======response=====",data);
+            console.log("=======response=====",html);
             //message: $("#messageInput").val();
-            addReply(data);
+            addReply(html);
             
 
           
