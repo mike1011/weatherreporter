@@ -97,7 +97,7 @@ const wwoApi = apiai(process.env.WWO_API_KEY);
 const wwoApiKey = process.env.WWO_API_KEY;
 
 var createCurrentWeatherHTML = function(currConditions, locationString) {
-    var html = '<div class="col-xs-6 text-center">';
+    var html = '<div class="col-sm-6 text-center">';
     html += "<h3>" + locationString + "</h3>"; // query string. In this case Liverpool, United Kingdom
     html += "<p>Current: <strong>" + currConditions[0].weatherDesc[0].value + "</strong></p>"; // get the current weather description
     html += "<p>Wind:" + currConditions[0].winddir16Point + " at " + currConditions[0].windspeedMiles + " mph/" + currConditions[0].windspeedKmph + " m/h</p>"; // wind details
@@ -115,7 +115,7 @@ function dayOfWeekAsString(dayIndex) {
 var createDaySummaryHTML = function(daysWeather) {
     //var imgSrc = "/icons/" + daysWeather.hourly[0].weatherCode + '.png';
     var imgSrc = daysWeather.hourly[0].weatherIconUrl[0].value;
-    var html = '<div class="col-xs-6 text-center">';
+    var html = '<div class="col-sm-6 text-center">';
     html += '<div class="day">' + dayOfWeekAsString(new Date(daysWeather.date).getDay())+ '</div>';
     html += '<div class="icon"><img src="' + imgSrc + '" alt="" /></div>';
     html += '<div class="celsius">' + daysWeather.maxtempC + ' °C | ' + daysWeather.mintempC + ' °C</div>';
