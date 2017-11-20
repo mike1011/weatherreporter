@@ -1,0 +1,33 @@
+   { source: 'google',
+     version: '2',
+     data: 
+      { isInSandbox: true,
+        surface: [Object],
+        inputs: [Array],
+        user: [Object],
+        conversation: [Object],
+        availableSurfaces: [Array] } },
+  id: 'bcf894d2-c0b3-466f-b7d1-da1a632353b0',
+  timestamp: '2017-11-16T09:45:25.733Z',
+  lang: 'en-us',
+  result: 
+   { source: 'agent',
+     resolvedQuery: 'paris',
+     speech: '',
+     action: '',
+     actionIncomplete: false,
+     parameters: { date: '', 'geo-city': 'Paris' },
+     contexts: [ [Object], [Object], [Object], [Object] ],
+     metadata: 
+      { matchedParameters: [Array],
+        intentName: 'weather',
+        intentId: '770fb186-edb9-48cb-98c9-3ce877cac73a',
+        webhookUsed: 'true',
+        webhookForSlotFillingUsed: 'false',
+        nluResponseTime: 24 },
+     fulfillment: { speech: 'Sorry I don\'t know the weather', messages: [Array] },
+     score: 1 },
+  status: { code: 200, errorType: 'success', webhookTimedOut: false },
+  sessionId: '1510825211442' }
+
+

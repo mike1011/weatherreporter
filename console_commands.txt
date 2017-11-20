@@ -1,0 +1,13 @@
+=======set up mongodb
+https://community.c9.io/t/setting-up-mongodb/1717
+more docs => https://docs.mongodb.com/getting-started/shell/client/
+====start the db
+mongod --dbpath=/data --port 27017
+
+=======copy host and port values to get db route
+mongodb://velvetdeth-express-example-1804858:27017
+
+=============create table now===
+node create_mongodb.js
+==========mongo db console=======
+mongo

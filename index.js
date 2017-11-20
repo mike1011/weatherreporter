@@ -4,12 +4,20 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var request = require('request');
 var dotenv = require('dotenv');
+var mongo = require('mongodb');
+///==============MONGO DB CONFIGS============
+var MongoClient = require('mongodb').MongoClient;
+///got the value of host and port after starting mongodb -> mongod --dbpath=/data --port 27017
+var url = "mongodb://mike1011-chatbot-5282159:27017/mydb";
+
 
 // There's no need to check if .env exists, dotenv will check this // for you. It will show a small warning which can be disabled when // using this in production.
 dotenv.load();
 
 app.use(express.static(__dirname + '/views')); // html
 app.use(express.static(__dirname + '/public')); // js, css, images
+//TODO - NEED TO READ THIS FILE - NON BLOCKING IO
+var sample_response = __dirname + '/mock/response.json';
 
 //////////////////////TODO - INCLUDE JS USING REQUIRE//////////////////////////////////////////////////////
 
@@ -78,7 +86,7 @@ var options = {
 app.post('/echo', function(req, res) {
 var request = api.textRequest( req.body.message,options, {'sessionId': new Date().getTime()});
   request.on('response', function(response) {
-    //console.log("========this is the response======",response);
+    console.log("========this is the response======",response);
     res.json(response);
   });
 
@@ -96,37 +104,79 @@ const host = 'api.worldweatheronline.com';
 const wwoApi = apiai(process.env.WWO_API_KEY);
 const wwoApiKey = process.env.WWO_API_KEY;
 
-var createCurrentWeatherHTML = function(currConditions, locationString) {
-    var html = '<div class="col-sm-6 text-center">';
-    html += "<h3>" + locationString + "</h3>"; // query string. In this case Liverpool, United Kingdom
-    html += "<p>Current: <strong>" + currConditions[0].weatherDesc[0].value + "</strong></p>"; // get the current weather description
-    html += "<p>Wind:" + currConditions[0].winddir16Point + " at " + currConditions[0].windspeedMiles + " mph/" + currConditions[0].windspeedKmph + " m/h</p>"; // wind details
-    html += "<p>Humidity: " + currConditions[0].humidity + "</p>";
-    html += "</div>";
 
-    return html;
-};
+//to store session id
+//NOT USED - sessionId is passed directly
+global.current_session_id;
+
+app.post('/weatherWebhook', function (req, res) {
+	var data = req.body;
+  console.log("WEBHOOK IS BEING CALLED FROM AI====================",data);
+  ///////global.current_session_id = data.sessionId;
+  	if (data.status.code === 200) {
+			  // res.setHeader('Content-Type', 'application/json');
+				sendFulfillmentResponse(res, true, {
+					speech: 'Processing...please wait',
+					displayText: 'Processing...please wait'
+				});			  
+			  handleFulfillmentRequest(req,res,data);
+        //     res.send(JSON.stringify({ 'speech': "Processing...please wait", 'displayText': "Processing...please wait" }));
+        // var speech = data.result && data.result.parameters && data.result.parameters.geo_city ? data.result.parameters.geo_city : "Seems like some problem. Speak again."
+        // return res.json({
+        //     speech: "Processing the request for "+speech,
+        //     displayText: "Processing the request for "+speech,
+        // });    
+        
+
+    } 
+})	
 
 
-function dayOfWeekAsString(dayIndex) {
-    return ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][dayIndex];
+function handleFulfillmentRequest(req, res, fulfillmentRequest) {
+	var parameters = fulfillmentRequest.result.parameters;
+	setTimeout(function() {
+    sendEventToApiAi(fulfillmentRequest.sessionId);
+    console.log("====intentionally added delay of 10 seconds");
+	}, 10000); 
 }
 
-var createDaySummaryHTML = function(daysWeather) {
-    //var imgSrc = "/icons/" + daysWeather.hourly[0].weatherCode + '.png';
-    var imgSrc = daysWeather.hourly[0].weatherIconUrl[0].value;
-    var html = '<div class="col-sm-6 text-center">';
-    html += '<div class="day">' + dayOfWeekAsString(new Date(daysWeather.date).getDay())+ '</div>';
-    html += '<div class="icon"><img src="' + imgSrc + '" alt="" /></div>';
-    html += '<div class="celsius">' + daysWeather.maxtempC + ' °C | ' + daysWeather.mintempC + ' °C</div>';
-    html += '<div class="farenheit">' + daysWeather.maxtempF + ' °F | ' + daysWeather.mintempF + ' °F</div>';
-    html += "</div>";
 
-    return html;
-};
+function sendEventToApiAi(sessionId) {
+  var event = {
+      name: "SHOW_RESULT",
+      data: {
+          name: "Milind",
+          state: "Processing"
+      }
+  };
+  
+  var options = {
+      sessionId: sessionId
+  };
+  
+  var request = api.eventRequest(event, options);  
+  
+  request.on('response', function(response) {
+    console.log(response.result);
+  });
+  
+  request.on('error', function(error) {
+  console.log(error);
+  });
+  
+  request.end();
+
+}
 
 
+function sendFulfillmentResponse(res, success, payload) {
+	payload.source = "FullFillment";
 
+	res.set('Content-Type', 'application/json');
+
+	res.status(success ? 200 : 500);
+	res.send(payload);
+}
 
 app.post('/wwo', function (req, res) {
   

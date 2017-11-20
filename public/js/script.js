@@ -49,7 +49,7 @@ function sentMessage(msg) {
     if (msg != "") 
     {
         addMessage(msg);
-        $.post( "wwo",$('form').serialize(), function( html ) {
+        $.post( "/echo",$('form').serialize(), function( html ) {
             //console.log("=======response=====",JSON.stringify(data.result.fulfillment.speech));
             console.log("=======response=====",html);
             //message: $("#messageInput").val();
